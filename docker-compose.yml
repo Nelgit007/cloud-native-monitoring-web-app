@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: webapp:1.1.0
+    ports:
+      - "80:5000"
+    restart: always
+    networks:
+      - webcat
+    environment:
+      FLASK_DEBUG: "true"
+
+networks:
+  webcat:
