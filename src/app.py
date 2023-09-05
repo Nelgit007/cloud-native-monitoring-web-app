@@ -3,24 +3,28 @@ import socket
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def hello_world():
     return "<p>Hello, I am Nelson Osagie, a Cloud / DevOps Engineer.</p>"
 
-#App health endpoint
+
+# App health endpoint
 @app.route("/status")
 def app_status():
     return jsonify(
         status="RUNNING"
     )
 
-#Function for fetching host name and ip add
+
+# Function for fetching host name and ip add
 def get_host_details():
     # Get the hostname
     hostname = socket.gethostname()
     # Get the IP address
     ip_address = socket.gethostbyname(hostname)
     return str(hostname), str(ip_address)
+
 
 @app.route("/details")
 def details():
