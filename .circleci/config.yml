@@ -2,6 +2,8 @@ version: 2.1
 
 orbs:
   python: circleci/python@2.0.3
+  aws-cli: circleci/aws-cli@4.0
+  aws-ecr: circleci/aws-ecr@9.0
 
 jobs:
   build: # this can be any name you choose
@@ -32,3 +34,10 @@ workflows:
     jobs:
       - build
       - lint
+      - aws-ecr/build-and-push-image:
+          repo: monitorin-app
+          tag: "latest,v1.0.0${CIRCLE_BUILD_NUM}"
+          dockerfile: Dockerfile
+          path: .
+          requires:
+            - build
